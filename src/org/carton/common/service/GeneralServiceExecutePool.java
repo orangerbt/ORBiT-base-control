@@ -30,7 +30,7 @@ public class GeneralServiceExecutePool {
 	}
 	/**
 	 * Create a execute pool for any class that extends from {@code GeneralService} 
-	 * will automticly initialize and  added in to an Executor.
+	 * will automatically initialize and  added in to an Executor.
 	 */
 	public GeneralServiceExecutePool() {
 		pool=Executors.newFixedThreadPool(MAXSIZE);
@@ -64,7 +64,7 @@ public class GeneralServiceExecutePool {
 		return true;
 	}
 	/**
-	 * get service in the pool by hte service name
+	 * get service in the pool by the service name
 	 * @param key
 	 * @return
 	 */

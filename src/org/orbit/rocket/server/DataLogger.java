@@ -20,6 +20,12 @@ public class DataLogger extends GeneralService{
 	File logFile;
 	boolean isAlive;
 	FileOutputStream fis;
+	/**
+	 * 
+	 * @param messege
+	 * @param valueName
+	 * @param value
+	 */
 	public void submitInfo(String messege,String valueName,String value) {
 		Date now=new Date();
         String time = format0.format(now.getTime());
@@ -36,6 +42,12 @@ public class DataLogger extends GeneralService{
 		}
 		
 	}
+	/**
+	 * 
+	 * @param messege
+	 * @param valueName
+	 * @param value
+	 */
 	public void submitWarning(String messege,String valueName,String value) {
 		Date now=new Date();
         String time = format0.format(now.getTime());
@@ -51,6 +63,9 @@ public class DataLogger extends GeneralService{
 			fis.notifyAll();
 		}
 	}
+	/**
+	 * 
+	 */
 	@Override
 	public String getName() {
 		// TODO Auto-generated method stub

@@ -12,6 +12,10 @@ public class DisplayUnit extends JPanel {
 	String dataTerm;
 	DisplayUnit next;
 	//color: Red-Error Yellow-Warning Green-Normal
+	/**
+	 * 
+	 * @param dataTerm
+	 */
 	public DisplayUnit(String dataTerm) {
 		super(new GridLayout(1,2));
 		dataName=new JLabel();
@@ -20,12 +24,24 @@ public class DisplayUnit extends JPanel {
 		this.add(value);
 		this.dataTerm=dataTerm;
 	}
+	/**
+	 * 
+	 * @return
+	 */
 	public String getDataType() {
 		return dataTerm.split("#")[0];
 	}
+	/**
+	 * 
+	 * @return
+	 */
 	public String getDataName() {
 		return dataTerm.split("#")[1];
 	}
+	/**
+	 * 
+	 * @param info
+	 */
 	public void updateInfo(HashMap<String,String> info) {
 		if(!dataTerm.equals(info.get("DataTerm"))) {
 			if(next!=null) {
@@ -50,15 +66,27 @@ public class DisplayUnit extends JPanel {
 		}
 		this.repaint();
 	}
+	/**
+	 * 
+	 * @param nextU
+	 */
 	public void addNext(DisplayUnit nextU) {
 		if(next!=null)next.addNext(nextU);
 		else next=nextU;
 	}
+	/**
+	 * 
+	 * @param DataTerm
+	 */
 	public void remove(String DataTerm) {
 		if(next!=null&&DataTerm.equals(next.getDataType()+"#"+next.getDataName())) {
 			next=next.breakChain();
 		}
 	}
+	/**
+	 * 
+	 * @return
+	 */
 	public DisplayUnit breakChain() {
 		return next;
 	}

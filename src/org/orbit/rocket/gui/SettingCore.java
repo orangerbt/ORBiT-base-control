@@ -22,6 +22,10 @@ public class SettingCore {
 		dataCoreProfile=new HashMap<String,String> ();
 		editingValueProfile=new HashMap<String,ValueProfile> ();
 	}
+	/**
+	 * 
+	 * @return
+	 */
 	public static SettingCore getCore() {
 		return core;
 	}

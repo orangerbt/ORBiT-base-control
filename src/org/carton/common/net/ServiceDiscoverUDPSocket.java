@@ -12,9 +12,9 @@ import java.util.Timer;
 import java.util.UUID;
 
 public class ServiceDiscoverUDPSocket implements AutoCloseable{
-	boolean isAlive=true;
-	String uuid;
-	Thread receiver=new Thread() {
+	private boolean isAlive=true;
+	private String uuid;
+	private Thread receiver=new Thread() {
 		public void run() {
 			while(isAlive) {
 				byte[] buffer=new byte[2048];
@@ -44,21 +44,35 @@ public class ServiceDiscoverUDPSocket implements AutoCloseable{
 		}
 	};
 
-	int port;
-	DatagramSocket ds;
-	Timer timer=new Timer();
-	ArrayList<ReceiveListener> rlList=new ArrayList<ReceiveListener>();
-	ArrayList<String> serviceList=new ArrayList<String>();
+	private int port;
+	private DatagramSocket ds;
+	private Timer timer=new Timer();
+	private ArrayList<ReceiveListener> rlList=new ArrayList<ReceiveListener>();
+	private ArrayList<String> serviceList=new ArrayList<String>();
+	/**
+	 * Constructor
+	 * @param ds
+	 */
 	public ServiceDiscoverUDPSocket(DatagramSocket ds) {
 		this.ds=ds;
 		receiver.start();
 		uuid=UUID.randomUUID().toString();
 	}
+	/**
+	 * Constructor
+	 * @param port
+	 * @throws SocketException
+	 */
 	public ServiceDiscoverUDPSocket(int port) throws SocketException {
 		ds=new DatagramSocket(port);
 		receiver.start();
 		uuid=UUID.randomUUID().toString();
 	}
+	/**
+	 * add a service to available service list
+	 * @param service
+	 * @param isHost
+	 */
 	public void addService(String service,boolean isHost) {
 		if(!serviceList.contains(service+isHost)) {
 			ReceiveListener rl=new ReceiveListener() {
@@ -107,6 +121,12 @@ public class ServiceDiscoverUDPSocket implements AutoCloseable{
 			serviceList.add(service+isHost);
 		}
 	}
+	/**
+	 * Add a service to available service list and run a listener when a service request is received
+	 * @param service
+	 * @param isHost
+	 * @param l
+	 */
 	public void addService(String service,boolean isHost,ReceiveListener l) {
 		ReceiveListener rl=new ReceiveListener() {
 
@@ -158,6 +178,11 @@ public class ServiceDiscoverUDPSocket implements AutoCloseable{
 			serviceList.add(service+isHost);
 		}
 	}
+	/**
+	 * Discover specific server from local network
+	 * @param service
+	 * @param isHost
+	 */
 	public void discoverService(String service,boolean isHost) {
 		if(!serviceList.contains(service+isHost)) {
 			return;
@@ -190,6 +215,14 @@ public class ServiceDiscoverUDPSocket implements AutoCloseable{
 		};
 		timer.schedule(ct, 0,100);
 	}
+	/**
+	 *  Discover specific server from local network
+	 * @param service
+	 * @param isHost
+	 * @param port
+	 * @param l
+	 * @throws UnknownHostException
+	 */
 	public void discoverService(String service,boolean isHost,int port,ReceiveListener l) throws UnknownHostException {
 		String messege=service+"@";
 		if(isHost)
@@ -223,6 +256,7 @@ public class ServiceDiscoverUDPSocket implements AutoCloseable{
 			serviceList.add(service+isHost);
 		}
 	}
+
 	@Override
 	public void close() throws Exception {
 		// TODO Auto-generated method stub

@@ -14,6 +14,17 @@ public class ValueProfile implements Serializable {
 	private double lowLimited;
 	private double passValue;
 	int order;
+	/**
+	 * 
+	 * @param type
+	 * @param name
+	 * @param display
+	 * @param unit
+	 * @param order
+	 * @param high
+	 * @param low
+	 * @param pass
+	 */
 	public ValueProfile(String type,String name,String display,String unit,int order,double high,double low,double pass) {
 		this.type=type;
 		this.name=name;
@@ -24,12 +35,25 @@ public class ValueProfile implements Serializable {
 		this.order=order;
 		this.unit=unit;
 	}
+	/**
+	 * 
+	 * @return
+	 */
 	public int getOrder() {
 		return order;
 	}
+	/**
+	 * 
+	 * @return
+	 */
 	public String getType() {
 		return type;
 	}
+	/**
+	 * 
+	 * @param e
+	 * @return
+	 */
 	public static ValueProfile complieProfileFromNode(Element e) {
 		if(e.getName().equals("ValueProfile")) {
 			String type=e.getAttributeValue("type");
@@ -53,6 +77,11 @@ public class ValueProfile implements Serializable {
 		}
 		return null;
 	}
+	/**
+	 * 
+	 * @param profile
+	 * @return
+	 */
 	public static ValueProfile compileProfileFromString(String profile) {
 		ValueProfile vp;
 		String type="";
@@ -104,6 +133,10 @@ public class ValueProfile implements Serializable {
 		vp=new ValueProfile(type, name, display,unit, order, highLimited, lowLimited, passValue);
 		return vp;
 	}
+	/**
+	 * 
+	 * @return
+	 */
 	public Element compileProfileToElement() {
 		Element e=new Element("ValueProfile");
 		e.setAttribute("type", type);
@@ -126,6 +159,10 @@ public class ValueProfile implements Serializable {
 		}
 		return e;
 	}
+	/**
+	 * 
+	 * @return
+	 */
 	public String compileProfileToString() {
 		String result="";
 		if(type!=null)result+=type;result+="$";
@@ -137,6 +174,11 @@ public class ValueProfile implements Serializable {
 		result+=passValue;
 		return result;
 	}
+	/**
+	 * 
+	 * @param datas
+	 * @return
+	 */
 	public HashMap<String,String> compileData(double[] datas){
 		double data=datas[this.order];
 		String value="";

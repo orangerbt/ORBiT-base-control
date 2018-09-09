@@ -32,15 +32,30 @@ public class DataCore extends GeneralServiceExecutePool{
 	HashMap<String,ConcurrentLinkedQueue<HashMap<String,Object>>> monitorQueueList=new HashMap<String,ConcurrentLinkedQueue<HashMap<String,Object>>>();
 	HashMap<String,String> dataDeliverList=new HashMap<String,String>();
 	ServiceDiscoverUDPSocket sdus;
+	/**
+	 * 
+	 * @throws FileNotFoundException
+	 * @throws JDOMException
+	 * @throws IOException
+	 */
 	public DataCore() throws FileNotFoundException, JDOMException, IOException {
 		File localPath=new File("").getAbsoluteFile();
 		File generalConfigFile=new File(localPath.getAbsolutePath()+File.separator+"setting.xml");
 		generalConfig=new ConfigAccesser(generalConfigFile);
 		loadConfig();
 	}
+	/**
+	 * 
+	 * @param dc
+	 */
 	public void addCollector(DataCollector dc) {
 		collectors.add(dc);
 	}
+	/**
+	 * 
+	 * @throws NumberFormatException
+	 * @throws SocketException
+	 */
 	public void loadConfig() throws NumberFormatException, SocketException {
 		generalSetting=new HashMap<String,String>();
 		ArrayList<String> listData=new ArrayList<String>(); 
@@ -84,6 +99,9 @@ public class DataCore extends GeneralServiceExecutePool{
 	//int - 123
 	//double - 12.12
 	//Point - 21.3#23.123
+	/**
+	 * 
+	 */
 	public void compileData() {
 		HashMap<String,Object> dataFrame=new HashMap<String,Object>();
 		for(DataCollector dc:collectors) {
@@ -120,6 +138,10 @@ public class DataCore extends GeneralServiceExecutePool{
 			e.printStackTrace();
 		}
 	}
+	/**
+	 * 
+	 * @throws IOException
+	 */
 	public void sendData() throws IOException {
 		Set<String> monitors=monitorQueueList.keySet();
 		for(String monitor:monitors) {
@@ -145,6 +167,12 @@ public class DataCore extends GeneralServiceExecutePool{
 //		}
 		
 	}
+	/**
+	 * 
+	 * @throws FileNotFoundException
+	 * @throws JDOMException
+	 * @throws IOException
+	 */
 	public void saveConfig() throws FileNotFoundException, JDOMException, IOException {
 		ArrayList<String> listData=new ArrayList<String>();
 		listData.addAll(monitorQueueList.keySet());

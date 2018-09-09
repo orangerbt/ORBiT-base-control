@@ -20,8 +20,11 @@ import java.util.concurrent.ConcurrentLinkedQueue;
 import org.carton.common.service.GeneralService;
 import org.carton.common.service.ServiceListener;
 /**
- * 
- * @author mike
+ * This socket add resent and dividing feature to origin socket. In order to receive data, a receive listener is required.
+ * @see ReceiveListener
+ * @version 1.1
+ * @author Mike
+ *
  *
  */
 public class GeneralUDPSocket extends GeneralService{
@@ -56,9 +59,19 @@ public class GeneralUDPSocket extends GeneralService{
 			}
 		}
 	};
+	/**
+	 * Constructor
+	 * @param port
+	 * @throws SocketException
+	 */
 	public GeneralUDPSocket(int port) throws SocketException {
 		 this(new DatagramSocket(port));
 	}
+	/**
+	 * Constructor
+	 * @param ds DatagramSocket
+	 * @throws SocketException
+	 */
 	public GeneralUDPSocket(DatagramSocket ds) throws SocketException {
 		 this.ds=ds;
 		 ds.setSoTimeout(1000);
@@ -197,6 +210,10 @@ public class GeneralUDPSocket extends GeneralService{
 	public void addListener(ServiceListener l) {
 		listenerList.add(l);
 	}
+	/**
+	 * add RecevieListener to listener list
+	 * @param l
+	 */
 	public void addRecevieListener(ReceiveListener l) {
 		listenerList.add(l);
 	}
@@ -213,6 +230,12 @@ public class GeneralUDPSocket extends GeneralService{
 	protected void callListener(HashMap<String, Object> map) {
 
 	}
+	/**
+	 * send data to specific ip and port
+	 * @param data
+	 * @param port
+	 * @param laddr
+	 */
 	public void send(byte[] data,int port,InetAddress laddr) {
 		if(data.length<1)
 			return;

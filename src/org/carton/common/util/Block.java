@@ -1,7 +1,7 @@
 package org.carton.common.util;
 
 /**
- * This class is design as a byte array saver than processer
+ * This class is design as a byte array saver
  * @author mike
  *
  */

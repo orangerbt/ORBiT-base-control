@@ -42,7 +42,12 @@ public class DataMonitor extends GeneralServiceExecutePool {
 	ArrayList<InetAddress> serverList;
 	DataLogger logger;
 	
-	
+	/**
+	 * 
+	 * @throws FileNotFoundException
+	 * @throws JDOMException
+	 * @throws IOException
+	 */
 	public DataMonitor() throws FileNotFoundException, JDOMException, IOException {
 		File localPath=new File("").getAbsoluteFile();
 		generalConfigFile=new File(localPath.getAbsolutePath()+File.separator+"Data_Monitor_Setting.xml");
@@ -83,6 +88,10 @@ public class DataMonitor extends GeneralServiceExecutePool {
 			throw new FileNotFoundException("Profile Compiling Error");
 		}
 	}
+	/**
+	 * 
+	 * @throws UnknownHostException
+	 */
 	public void checkServer() throws UnknownHostException {
 		sdus.discoverService(name, false,discoverPort, new ReceiveListener() {
 
@@ -104,22 +113,37 @@ public class DataMonitor extends GeneralServiceExecutePool {
 	}
 	
 	
-	
+	/**
+	 * 
+	 * @param u
+	 */
 	public void addDisplayUnit(DisplayUnit u) {
 		if(displayMap.containsKey(u.getDataType()))displayMap.get(u.getDataType()).addNext(u);
 		else {
 			displayMap.put(u.getDataType(), u);
 		}
 	}
+	/**
+	 * 
+	 * @param l
+	 */
 	public void addAllDisplayUnit(List<DisplayUnit> l) {
 		for(DisplayUnit u:l) {
 			addDisplayUnit(u);
 		}
 	}
+	/**
+	 * 
+	 * @param DataType
+	 * @param DataName
+	 */
 	public void removeDisplayUnit(String DataType,String DataName) {
 		if(displayMap.containsKey(DataType))displayMap.get(DataType).remove(DataType+"#"+DataName);
 	}
-	
+	/**
+	 * 
+	 * @throws Exception
+	 */
 	private void processInfo()throws Exception {
 		if(!dataQueue.isEmpty()) {
 			HashMap<String,Object> dataItem=dataQueue.poll();
@@ -137,7 +161,13 @@ public class DataMonitor extends GeneralServiceExecutePool {
 			}
 		}
 	}
-	
+	/**
+	 * 
+	 * @param e
+	 * @throws FileNotFoundException
+	 * @throws JDOMException
+	 * @throws IOException
+	 */
 	private void loadConfigurationFromElement(Element e) throws FileNotFoundException, JDOMException, IOException {
 		if(e.getName()!="DataMonitor"&&
 			e.getAttributeValue("Name")==null&&
@@ -197,6 +227,10 @@ public class DataMonitor extends GeneralServiceExecutePool {
 		FileOutputStream fos=new FileOutputStream(generalConfigFile);
 		xop.output(document, fos);
 	}
+	/**
+	 * 
+	 * @throws IOException
+	 */
 	public void saveConfiguration() throws IOException {
 		Element e=saveConfigConfigurationToElement();
 		saveConfigurationToFile(e);
