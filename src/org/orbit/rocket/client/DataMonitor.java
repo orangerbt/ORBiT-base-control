@@ -235,6 +235,15 @@ public class DataMonitor extends GeneralServiceExecutePool {
 		Element e=saveConfigConfigurationToElement();
 		saveConfigurationToFile(e);
 	}
+	public HashMap<String,Object> getMonitorData(){
+		HashMap<String,Object> dataMap=new HashMap<String,Object>();
+		dataMap.put("name", name);//Strings
+		dataMap.put("dataport", dataPort+"");//String
+		dataMap.put("discoverport", discoverPort+"");//String
+		dataMap.put("datatypes", profileMap.keySet());//Set<String>
+		dataMap.put("serverlist", serverList);//List<InetAddress>
+		return dataMap;
+	}
 	private <T> T $(Object o) {
 		return (T)o;
 	}
