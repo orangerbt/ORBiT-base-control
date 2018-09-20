@@ -1,13 +1,17 @@
 package org.orbit.rocket.gui;
+import java.util.List;
+import java.util.Map;
 
-public abstract class DisplayCore {
-	public abstract String getMonitorName();
-	public abstract String getServerIP();
-	public abstract int getServerPort();
-	public abstract String getStatus();
-	public abstract int getID();
-	public abstract void setMonitorName(String name);
-	public abstract void setServerIP(String ip);
-	public abstract void setServerPort(int port);
-	
+public interface DisplayCore {
+	String getMonitorName();
+	String getServerIP();
+	int getServerPort();
+	int getMonitorID();
+	List<Map<String,String>> getSensorSetting();//See excel file attach
+	void setSensorSetting(List<Map<String,String>> setting);//See excel file attach
+	void setServerIP(String ip);
+	void setServerPort(int port);
+	void setMonitorName(String name);
+	void addDataListener(InfoListener l);
+	void removeDataListener(InfoListener l);
 }

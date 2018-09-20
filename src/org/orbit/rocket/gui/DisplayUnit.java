@@ -17,6 +17,7 @@ public class DisplayUnit extends JPanel {
 	 * @param dataTerm
 	 */
 	public DisplayUnit(String dataTerm) {
+		
 		super(new GridLayout(1,2));
 		dataName=new JLabel();
 		value=new JLabel();
