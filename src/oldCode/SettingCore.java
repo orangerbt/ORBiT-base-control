@@ -1,4 +1,4 @@
-package org.orbit.rocket.gui;
+package oldCode;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -6,8 +6,6 @@ import java.util.HashMap;
 import javax.swing.JCheckBox;
 import javax.swing.JList;
 import javax.swing.JTextField;
-
-import org.orbit.rocket.client.ValueProfile;
 
 
 public class SettingCore {

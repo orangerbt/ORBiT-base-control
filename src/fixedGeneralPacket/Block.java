@@ -1,4 +1,4 @@
-package org.carton.common.util;
+package fixedGeneralPacket;
 
 /**
  * This class is design as a byte array saver
