@@ -12,6 +12,6 @@ public interface DisplayCore {
 	void setServerIP(String ip);
 	void setServerPort(int port);
 	void setMonitorName(String name);
-	void addDataListener(InfoListener l);
-	void removeDataListener(InfoListener l);
+	void addDataListener(DataListener l);
+	void removeDataListener(DataListener l);
 }
