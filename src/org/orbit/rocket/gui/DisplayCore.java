@@ -2,6 +2,8 @@ package org.orbit.rocket.gui;
 import java.util.List;
 import java.util.Map;
 
+import oldCode.InfoListener;
+
 public interface DisplayCore {
 	String getMonitorName();
 	String getServerIP();

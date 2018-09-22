@@ -1,4 +1,4 @@
-package org.carton.common.net;
+package fixedGeneralPacket;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
@@ -16,9 +16,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Queue;
 import java.util.concurrent.ConcurrentLinkedQueue;
-
-import org.carton.common.service.GeneralService;
-import org.carton.common.service.ServiceListener;
 /**
  * This socket add resent and dividing feature to origin socket. In order to receive data, a receive listener is required.
  * @see ReceiveListener

@@ -1,10 +1,8 @@
-package org.carton.common.net;
+package fixedGeneralPacket;
 
 import java.net.InetAddress;
 import java.util.Map;
 import java.util.Queue;
-
-import org.carton.common.service.ServiceListener;
 /**
  * 
  * @author mike
